@@ -1,0 +1,159 @@
+package ATMMachine;
+import java.util.*;
+public class ATM_operations {
+	{
+
+		int amt,total=0;
+		int two_thousands;
+		int five_hundreds;
+		int hundred;
+		String a[]= {"101","102","103","104","105"};
+		String b[]= {"Suresh","Ramesh","Ganesh","Mahesh","Harish"};
+		String c[]= {"1234","5","5675","5879","5887"};
+		int d[]= {34565,65474,67657,8768,78989};
+		public void loadcash()
+		{
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter number of two thousands");
+			two_thousands=sc.nextInt();
+			System.out.println("Enter number of five_hundreds");
+			five_hundreds=sc.nextInt();
+			System.out.println("Enter number of  hundreds");
+			hundred=sc.nextInt();
+			total=(2000*two_thousands)+(500*five_hundreds)+(100*hundred);
+			System.out.println("Denomination"+" "+"Number"+" "+"Value");
+			System.out.println("2000"+" "+two_thousands+" "+(2000*two_thousands));
+			System.out.println("500"+" "+five_hundreds+" "+(500*five_hundreds));
+			System.out.println("100"+" "+hundred+" "+(100*hundred));
+			System.out.println("Total cash available:"+total);
+		}
+		public void custdetails()
+		{
+			String a[]= {"101","102","103","104","105"};
+			String b[]= {"Suresh","Ramesh","Ganesh","Mahesh","Harish"};
+			String c[]= {"1234","5","5675","5879","5887"};
+			int d[]= {34565,65474,67657,8768,78989};
+			for(int i=0;i<5;i++)
+			{
+				System.out.println(a[i]+" "+b[i]+" "+c[i]+" "+d[i]);
+			}
+		}
+		public void operations()
+		{
+			int ch;
+			do
+			{
+				System.out.println("1.Check Balance");
+				System.out.println("2.Withdraw Money");
+				System.out.println("3.Transfer Money");
+				System.out.println("4.Check ATM Balance");
+				Scanner sc=new Scanner(System.in);
+				ch=sc.nextInt();
+				switch(ch)
+				{
+				case 1:
+				{
+					String n=sc.next();
+					String p=sc.next();
+					for(int i=0;i<5;i++)
+					{
+						if(a[i].equals(n)&&c[i].equals(p))
+						{
+							System.out.println(d[i]);
+						}
+					}
+					break;  
+				}
+				case 2:
+				{
+					int i;
+					String n=sc.next();
+					String p=sc.next();
+					for( i=0;i<5;i++)
+					{
+						if(a[i].equals(n)&&c[i].equals(p))
+						{
+							System.out.println("Enter the amount to be withdrawal:");
+							amt=sc.nextInt();
+							if(amt<=d[i])
+							{
+								System.out.println("please take your Money!!!");
+								d[i]-=amt;    
+							}
+							else
+								System.out.println("Withdrawal failed!!!");
+						}
+					}
+					break;
+				}
+				case 3:
+				{
+					System.out.println("Enter the account no of the sender:");
+					String ac_n=sc.next();
+					System.out.println("Enter the pin number of the sender:");
+					String p_n=sc.next();
+					System.out.println("Enter the  of the account no of the receiver:");
+					String ac_n1=sc.next();
+					System.out.println("Enter the amount to be transfer:");
+					int amt1=sc.nextInt();
+					for(int i=0;i<5;i++)
+					{
+						if(a[i].equals(ac_n)&&c[i].equals(p_n))
+						{
+							if((amt1<=d[i])&&(amt1>1000&&amt1<10000))
+							{
+								System.out.println("Transaction Successfull!!!");
+							}
+							else
+							{
+								System.out.println("Transaction failed!!!");
+							}
+						}
+					}
+					int i;
+					for(i=0;i<5;i++)
+					{
+						if(a[i].equals(ac_n1))
+						{
+							d[i]+=amt1;
+		   
+						}
+					}
+		 
+					for(i=0;i<5;i++)
+					{
+						if(a[i].equals(ac_n))
+						{
+							d[i]-=amt1;		    
+						}
+					}
+					break;
+				}
+				case 4:
+				{
+					int total1=total-amt;
+					two_thousands -= amt/2000;
+					amt -= amt/2000;
+					five_hundreds -= amt/1000;
+					amt -= amt/1000;
+					hundred -= amt/100;
+					amt -= 100;
+					System.out.println("Denomination"+" "+"Number"+" "+"Value");
+					System.out.println("2000"+" "+two_thousands+" "+(2000*two_thousands));
+					System.out.println("500"+" "+five_hundreds+" "+(500*five_hundreds));
+					System.out.println("100"+" "+hundred+" "+(100*hundred));
+					System.out.println("Total cash available:"+total1);
+				}
+			   }
+			}while(ch!=4);
+		}
+		public static void main(String[] args)
+		{
+			ATM_operations ao=new ATM_operations();
+			ao.loadcash();
+			ao.custdetails();
+			ao.operations();
+		}
+	}
+
+}
